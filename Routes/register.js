@@ -3,9 +3,12 @@
 const express = require('express')
 const router = express.Router()
 
-// @route POST  /myPortfolio/profileUpdate
-//@details  user can update details form
+// @route POST  /myPortfolio/register
+//@details  to register a user on app
 //access     PRIVATE
 
 
-router.post()
+router.post('/', (req, res) => res.send('Registering a user'))
+
+
+module.exports = router;
