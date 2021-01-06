@@ -8,7 +8,7 @@ app.get('/', (req, res) => res.json({ msg : "started building backend"}))
 //Defining Routes 
 
 app.use('/myPortfolio/auth', require('./Routes/auth'));
-app.use('/myPortfolio/user', require('./Routes/user'));
+app.use('/myPortfolio/register', require('./Routes/register'));
 app.use('/myPortfolio/portfolio', require('./Routes/portfolio'));
 
 
