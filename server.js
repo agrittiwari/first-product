@@ -9,8 +9,8 @@ app.get('/', (req, res) => res.json({ msg : "started building backend"}))
 
 app.use('/myPortfolio/auth', require('./Routes/auth'));
 app.use('/myPortfolio/register', require('./Routes/register'));
-app.use('/myPortfolio/portfolio', require('./Routes/portfolio'));
-app.use('/myPortfolio', require('./Routes/individual'));
+app.use("/myPortfolio/portfolio", require('./Routes/portfolio'));
+app.use("/myPortfolio", require('./Routes/individual'));
 
 
 

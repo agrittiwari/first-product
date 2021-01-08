@@ -7,3 +7,4 @@ const express = require('express')
 router.get('/', (req, res) => res.send('All registered Users'))
 
 
+module.exports = router;
