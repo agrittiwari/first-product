@@ -9,12 +9,11 @@ const Register = require('../models/Register')
 
 // @route POST  /myPortfolio/register
 //@details  to register a user on app
-//access     PRIVATE
-
+//access    PUBLIC
 
 router.post('/', (req, res) =>
 {
-    res.send('Registering a user')
+    res.send(req.body)
 })
 
 
