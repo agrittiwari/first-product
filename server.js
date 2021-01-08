@@ -1,8 +1,14 @@
 const express = require('express');
-
+const connectDB = require('./config/db')
 
 const app = express();
 app.get('/', (req, res) => res.json({ msg : "started building backend"}))
+
+
+//Connecting Database
+
+connectDB()
+
 
 
 //Defining Routes 
