@@ -5,7 +5,7 @@ const UserSchema = mongoose.Schema({
         required :true
     },
     email: {
-        type: email,
+        type: String,
         required: true,
         unique: true
     },
@@ -20,4 +20,4 @@ const UserSchema = mongoose.Schema({
     }
 })
   
-module.exports = mongoose.model('new-user', UserSchema)
+module.exports = mongoose.model('register', UserSchema)
