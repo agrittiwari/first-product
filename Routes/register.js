@@ -4,6 +4,9 @@ const express = require('express')
 const router = express.Router()
 const { check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const config = require('config')
+
 const Register = require('../models/Register')
 
 
@@ -51,7 +54,25 @@ router.post('/', [
             //saving to the database
 
             await register.save()
-             res.send('User registered')
+            
+            //payload is the object we want to send from database 
+            const payload = {
+                register: {
+                    id: register.id
+                }
+            }
+//Creating json web token with our registered user ID and a secret to make token secure 
+            jwt.sign(payload, config.get(jwtSecret), {
+                expiresIn:3600
+            },
+                (err, token) =>
+                {
+                    if (err) throw err;
+                    res.json({ token})
+                    
+            })
+
+
 
         } catch (err) {
             console.error(err.message)

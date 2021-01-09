@@ -1,3 +1,4 @@
 {
-    "mongoURI" : "mongodb+srv://agrittiwari:myportfolio07AGRIT@cluster0.k3ugo.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    "mongoURI" : "mongodb+srv://agrittiwari:myportfolio07AGRIT@cluster0.k3ugo.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "jwtSecret" : "myPortfolioSECRET"
 }
