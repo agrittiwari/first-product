@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken')
 const config = require('config')
 
 const Register = require('../models/Register')
+const auth = require('../middleware/auth')
 
 
 
@@ -17,7 +18,16 @@ const Register = require('../models/Register')
 // @route GET  /myPortfolio/profileUpdate
 //@details  user can update details form, GET LOGGED IN uSER
 //access     PRIVATE
-router.get('/',[], (req, res) => res.send('user can update his profile now'))
+router.get('/', auth, async (req, res) =>
+{
+    try {
+        const register = await Register.findById(req.register.id).select('-password')
+        res.json(register)
+    } catch (err) {
+        console.error(err)
+        res.status(400).json({ msg: 'Server Error' })
+    }
+})
 
 
 
