@@ -62,7 +62,7 @@ router.post('/', [
                 }
             }
 //Creating json web token with our registered user ID and a secret to make token secure 
-            jwt.sign(payload, config.get(jwtSecret), {
+            jwt.sign(payload, config.get('jwtSecret'), {
                 expiresIn:3600
             },
                 (err, token) =>
