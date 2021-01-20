@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const IndividualSchema = mongoose.Schema({
 
     register: {
-        type: mongoose.Schema.Types.objectID,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'registers'
     },
     status: {
