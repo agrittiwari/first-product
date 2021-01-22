@@ -32,10 +32,10 @@ router.get('/me', auth, async(req, res) =>
 //access     PRIVATE
 
 
-router.post('/', [
+router.post('/', auth, 
     check('status', 'Please update your status').not().isEmpty(),
     check('skills', 'Please update your skills').not().isEmpty()
-], async (req, res) =>
+, async (req, res) =>
 {
         
         const errors = validationResult(req)
@@ -102,11 +102,8 @@ router.post('/', [
             let individualProfile = await Individual.findOneAndUpdate(
                 { register: req.register.id },
                 { $set: individualProfileFields },
-                { new: true },
-                {upsert: true }
-                )
-
-                return(res.json(individualProfile))      
+                { new: true, upsert: true, setDefaultsOnInsert: true }                )
+                return res.json(individualProfile)      
                  
         } catch (err) {
             console.error(err)

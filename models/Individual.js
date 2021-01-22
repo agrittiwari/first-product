@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const IndividualSchema = mongoose.Schema({
+const IndividualSchema = new mongoose.Schema({
 
     register: {
         type: mongoose.Schema.Types.ObjectId,

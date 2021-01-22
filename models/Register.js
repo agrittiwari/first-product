@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const RegisterSchema = mongoose.Schema({
+const RegisterSchema =new mongoose.Schema({
     name: {
         type: String,
         required :true
