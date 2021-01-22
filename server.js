@@ -1,14 +1,16 @@
 const express = require('express');
 const connectDB = require('./config/db')
-
+const bodyParser = require('body-parser')
 const app = express();
 app.get('/', (req, res) => res.json({ msg : "started building backend"}))
 
 
 //init middleware to use req.body
-app.use(express.json({ extended: false}))
 
 
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }))
 
 //Connecting Database
 

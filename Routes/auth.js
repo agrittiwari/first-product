@@ -23,6 +23,7 @@ router.get('/', auth, async (req, res) =>
     try {
         const register = await Register.findById(req.register.id).select('-password')
         res.json(register)
+        console.log(register.id)
     } catch (err) {
         console.error(err)
         res.status(400).json({ msg: 'Server Error' })
