@@ -18,6 +18,7 @@ router.post('/', [
     check('name', 'Please add Name')
         .not()
         .isEmpty(),
+        check('userPortfolio', 'your unique portfolio address requires a followUpname use @ and _ instead, if intended').notEmpty(),
     check('email', 'Please add a unique email')
         .isEmail(),
     check('password', 'Please enter apassword with 6 or more characters')
@@ -29,18 +30,22 @@ router.post('/', [
             return res.status(400).json({ errors: errors.array() })
         }
 
-        const { name, email, password } = req.body;
+        const { name, userPortfolio,  email, password } = req.body;
 
         try {
             
             let register = await Register.findOne({ email });
+            let portfolio =  await Register.findOne({ userPortfolio })
 
-            if (register) {
+            if (register  ) {
                 return res.status(400).json({msg: 'User already registered'})
+            } else if (portfolio) {
+                return res.status(400).json({msg: 'Portfolio name is already used'})
             }
 
             register = new Register({
                 name,
+                userPortfolio,
                 email,
                 password
             })
@@ -58,7 +63,8 @@ router.post('/', [
             //payload is the object we want to send from database 
             const payload = {
                 register: {
-                    id: register.id
+                    id: register.id,
+                    
                 }
             }
 //Creating json web token with our registered user ID and a secret to make token secure 
@@ -73,7 +79,7 @@ router.post('/', [
             })
 
 
-
+           //res.json(userPortfolio) its not needed to accesed from token or something
         } catch (err) {
             console.error(err.message)
             res.status(400).send('Server error')

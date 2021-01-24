@@ -13,13 +13,13 @@ router.get('/me', auth, async(req, res) =>
 {
     try {
         
-        const individualProfile = await Individual.findOne({ register: req.register.id }).populate('register', ['name'])
+        const individualProfile = await Individual.findOne({ register: req.register.id }).populate('register', ['name', 'userPortfolio'])
         
         if (!individualProfile) {
             res.status(400).json({msg:"This individual has no profile"})
         }
         
-        res.send('Profile found').json(individualProfile);
+        res.json(individualProfile);
 
     } catch (err) {
         console.error(err)
@@ -33,6 +33,7 @@ router.get('/me', auth, async(req, res) =>
 
 
 router.post('/', auth, 
+
     check('status', 'Please update your status').not().isEmpty(),
     check('skills', 'Please update your skills').not().isEmpty()
 , async (req, res) =>
@@ -43,7 +44,8 @@ router.post('/', auth,
             return res.status(400).json({error: errors.array()})
         }
 
-        const {
+    const {
+          
             location,
             status,
             skills,
@@ -63,6 +65,7 @@ router.post('/', auth,
         const individualProfileFields = {
             register : req.register.id,
             status,
+          
             location,
             bio,
             skills : Array.isArray(skills) ? skills : skills.split('.').map((skill) => ' ' + skill.trim())
@@ -79,7 +82,7 @@ router.post('/', auth,
         
         for (const [key, value] of Object.entries(blogFields)) {
             if(value && value.length > 0)
-            blogFields(key) =normalize(value, {forcehttps: true})
+            blogFields[key] =normalize(value, {forcehttps: true})
         }
          
         individualProfileFields.blogs = blogFields
@@ -89,7 +92,7 @@ router.post('/', auth,
         
         for (const [key, value] of Object.entries(socialFields)) {
             if (value && value.length > 0)
-                socialFields(key) = normalize(value, {forcehttps: true})
+                socialFields[key] = normalize(value, {forcehttps: true})
         }
 
         individualProfileFields.socials = socialFields
@@ -102,7 +105,7 @@ router.post('/', auth,
             let individualProfile = await Individual.findOneAndUpdate(
                 { register: req.register.id },
                 { $set: individualProfileFields },
-                { new: true, upsert: true, setDefaultsOnInsert: true }                )
+                { new: true, upsert: true, setDefaultsOnInsert: true }                ).populate('register', ['name', 'userPortfolio'])
                 return res.json(individualProfile)      
                  
         } catch (err) {

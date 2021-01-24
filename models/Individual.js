@@ -3,8 +3,10 @@ const IndividualSchema = new mongoose.Schema({
 
     register: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'registers'
+        ref: 'register'
     },
+    
+    
     status: {
         type: String,
         required: true

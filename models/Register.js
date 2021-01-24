@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 const RegisterSchema =new mongoose.Schema({
-    name: {
+    userPortfolio: {
         type: String,
-        required :true
+        required: true
+    },
+    name: {
+        type:String
     },
     email: {
         type: String,

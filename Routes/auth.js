@@ -36,6 +36,7 @@ router.get('/', auth, async (req, res) =>
 //@details  to login user, auth user and get Token
 //access     PUBLIC
 router.post('/', [
+   
     check('email', 'Please use a valid email')
         .isEmail(),
     check('password', 'Please use a password upto 6 characters')
@@ -47,7 +48,7 @@ router.post('/', [
             return res.status(400).json({ errors: errors.array() })
         }
 
-        const { email, password } = req.body
+        const {  email, password } = req.body
         
         try {
             let register = await Register.findOne({ email })

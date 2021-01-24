@@ -22,7 +22,7 @@ connectDB()
 
 app.use('/myPortfolio/auth', require('./Routes/auth'));
 app.use('/myPortfolio/register', require('./Routes/register'));
-app.use("/myPortfolio/portfolio", require('./Routes/portfolio'));
+app.use("/myPortfolio/", require('./Routes/portfolio'));
 app.use("/myPortfolio", require('./Routes/individual'));
 
 
