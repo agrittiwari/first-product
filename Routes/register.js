@@ -18,7 +18,7 @@ router.post('/', [
     check('name', 'Please add Name')
         .not()
         .isEmpty(),
-        check('userPortfolio', 'your unique portfolio address requires a followUpname use @ and _ instead, if intended').notEmpty(),
+        
     check('email', 'Please add a unique email')
         .isEmail(),
     check('password', 'Please enter apassword with 6 or more characters')
@@ -30,22 +30,19 @@ router.post('/', [
             return res.status(400).json({ errors: errors.array() })
         }
 
-        const { name, userPortfolio,  email, password } = req.body;
+        const { name,   email, password } = req.body;
 
         try {
             
             let register = await Register.findOne({ email });
-            let portfolio =  await Register.findOne({ userPortfolio })
+            
 
             if (register  ) {
                 return res.status(400).json({msg: 'User already registered'})
-            } else if (portfolio) {
-                return res.status(400).json({msg: 'Portfolio name is already used'})
-            }
-
+            } 
             register = new Register({
                 name,
-                userPortfolio,
+                
                 email,
                 password
             })

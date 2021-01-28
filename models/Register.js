@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 const RegisterSchema =new mongoose.Schema({
-    userPortfolio: {
-        type: String,
-        required: true
-    },
+    
     name: {
         type:String
     },

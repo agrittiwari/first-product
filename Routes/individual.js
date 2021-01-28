@@ -33,6 +33,7 @@ router.get('/me', auth, async(req, res) =>
 
 
 router.post('/', auth, 
+check('userPortfolio', 'your unique portfolio address requires a followUpname use @ and _ instead, if intended').notEmpty(),
 
     check('status', 'Please update your status').not().isEmpty(),
     check('skills', 'Please update your skills').not().isEmpty()
@@ -45,7 +46,7 @@ router.post('/', auth,
         }
 
     const {
-          
+          userPortfolio,
             location,
             status,
             skills,
@@ -101,11 +102,20 @@ router.post('/', auth,
            
 
             //update
+            let portfolio =  await Individual.findOne({ userPortfolio })
             
+            if (portfolio) {
+                return res.status(400).json({ msg: 'Portfolio name is already used' })
+            } else {
+                individualProfileFields.userPortfolio = userPortfolio
+            }
+
             let individualProfile = await Individual.findOneAndUpdate(
                 { register: req.register.id },
                 { $set: individualProfileFields },
-                { new: true, upsert: true, setDefaultsOnInsert: true }                ).populate('register', ['name', 'userPortfolio'])
+                { new: true, upsert: true, setDefaultsOnInsert: true }
+            )
+console.log(individualProfile)
                 return res.json(individualProfile)      
                  
         } catch (err) {

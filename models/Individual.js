@@ -1,12 +1,16 @@
 const mongoose = require('mongoose')
+const Register = require('./Register')
 const IndividualSchema = new mongoose.Schema({
 
     register: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'register'
     },
-    
-    
+    userPortfolio: {
+        
+        type: String,
+        required: true
+    },
     status: {
         type: String,
         required: true
