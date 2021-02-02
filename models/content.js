@@ -3,33 +3,52 @@ const ContentSchema = mongoose.Schema({
     
     register: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'registers'
+        ref: 'register'
     },
 
     podcast: [
         {
-            link: {
-                type:String
+            podcast_link: {
+                type: String
+                
             },
-            heading: {
-                type:String
+            podcast_heading: {
+                type: String,
+                required: function ()
+                {
+                    return this.podcast_link != null
+                }
             },
-            description: {
-                type:String
+            podcast_description: {
+                type: String,
+                required: function ()
+                {
+                    return this.podcast_link != null
+                }
             }
         }
     ],
-
+    about: {
+        type:String,
+    },
     video: [
         {
-            link: {
+            video_link: {
                 type:String
             },
-            heading: {
-                type:String
+            video_heading: {
+                type: String,
+                required: function ()
+                {
+                    return this.video_link != null
+                }
             },
-            description: {
-                type:String
+            video_description: {
+                type: String,
+                    required: function ()
+                {
+                    return this.video_link != null
+                }
             }
         }
     ]

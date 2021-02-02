@@ -124,7 +124,28 @@ console.log(individualProfile)
         }
 
 
-})
+    })
 
+    // @route DELETE  /myPortfolio/
+    //@details  DELETE PORTFOLIO AND registerd user
+    //access     PRIVATE
+
+router.delete('/', auth, async(req, res) =>
+{
+    try {
+        
+        await Individual.findOneAndRemove({ register: req.register.id })
+        await Register.findOneAndRemove({ id: req.register.id })
+        res.json({msg: "Portfolio removed"})
+        
+    } catch (err) {
+        console.error(err.message)
+        if (err.kind == 'ObjectId') {
+            return res.status(400).json({msg:'Profile not found'})
+        }
+        return res.status(500).json({msg:'Server Error'})
+    }
+ 
+})
 
 module.exports = router;

@@ -24,6 +24,7 @@ app.use('/myPortfolio/auth', require('./Routes/auth'));
 app.use('/myPortfolio/register', require('./Routes/register'));
 app.use("/myPortfolio/", require('./Routes/portfolio'));
 app.use("/myPortfolio", require('./Routes/individual'));
+app.use("/myPortfolio/myContent", require('./Routes/contentForm'))
 
 
 
