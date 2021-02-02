@@ -148,4 +148,79 @@ router.delete('/', auth, async(req, res) =>
  
 })
 
+ // @route PUT  /myPortfolio/experience
+    //@details  Add new Experience
+    //access     PRIVATE
+
+router.put('/experience',
+    check('title', 'Please add  a title').notEmpty(),
+    check('company', 'Please add  your workPlace').notEmpty(),
+    check('from', 'add your starting time').notEmpty(),
+    check('current', 'Do you currently work there').notEmpty(),
+    auth, async(req, res) =>
+{
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+        return res.status(400).json({error: errors.array()})
+        }   
+        
+        const {
+            title,
+            company,
+            from,
+            to,
+            current,
+            description
+        } = req.body
+        
+        const newExp = {
+            title,
+            company,
+            from,
+            to,
+            current,
+            description
+        }
+
+        try {
+            const portfolio = await Individual.findOne({register: req.register.id})
+            console.log(portfolio)
+            portfolio.experience.unshift(newExp)
+
+            await portfolio.save()
+            console.log(portfolio)
+            res.json(portfolio)
+
+        } catch (err) {
+            console.error(err)
+            return res.status(500).json({msg: 'Server Error'})
+        }
+})
+
+
+ // @route DELETE  /myPortfolio/experience/:exp_id
+    //@details  delete Experience
+    //access     PRIVATE
+
+router.delete('experience/:exp_id', auth, async(req , res) => {
+    try {
+    
+        const portfolio = await Individual.findOne({ register: req.register.id })
+        console.log(portfolio)
+        const removeIndex = portfolio.experience.map(item => item.id).indexOf(req.params.exp_id)
+        console.log(removeIndex)
+        
+        portfolio.experience.splice(removeIndex, 1)
+
+        await portfolio.save()
+
+        res.json(portfolio)
+
+    } catch (err) {
+        console.error(err)
+        return res.status(500).json({msg:'sever error'})
+    }   
+    
+    })
+
 module.exports = router;

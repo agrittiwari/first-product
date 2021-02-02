@@ -3,7 +3,7 @@ const Register = require('./Register')
 const IndividualSchema = new mongoose.Schema({
 
     register: {
-        _id: String,
+       
         type: mongoose.Schema.Types.ObjectId,
         ref: 'register'
     },
