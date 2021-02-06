@@ -202,7 +202,7 @@ router.put('/experience',
     //@details  delete Experience
     //access     PRIVATE
 
-router.delete('experience/:exp_id', auth, async(req , res) => {
+router.delete('/experience/:exp_id', auth, async(req , res) => {
     try {
     
         const portfolio = await Individual.findOne({ register: req.register.id })
