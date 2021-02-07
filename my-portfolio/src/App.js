@@ -3,12 +3,19 @@ import './App.css';
 import Home from "./Components/pages/Home";
 
 
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 function App() {
   return (
-    <div >
-      <Home/>
+    <Router>
+      <div >
+        <Switch>
+          <Route exact path='/' ><Home/></Route>
         
+     </Switch>
     </div>
+    </Router>
+    
   );
 }
 
