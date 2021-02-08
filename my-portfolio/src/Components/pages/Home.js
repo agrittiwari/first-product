@@ -19,14 +19,14 @@ const Home = () => {
     <section className="landing">
       <div className="dark-overlay">
         <div className="landing-inner">
-          <h1 className="x-large">Developer Connector</h1>
+          <h1 className="x-large">Profiler.com</h1>
           <p className="lead">
                             Build your profile/portfolio, your personal web space , 
                             your personal showcase
           </p>
-          <div className="buttons">
-                            <Link to="/register" className="btn-1 btn-primary">Make your Portfolio</Link>
-            <Link to="/login" className="btn btn-light">Login</Link>
+          <div style={Style}>
+            <Link to="/register" className="btn-1 ">Make your Profile/ Portfolio</Link>
+            <Link to="/login" className="btn ">Login</Link>
           </div>
         </div>
       </div>
@@ -46,5 +46,8 @@ const Home = () => {
 //     fontSize:30,
 //   }
 
+const Style = {
+margin : 40  
+}
 
 export default Home

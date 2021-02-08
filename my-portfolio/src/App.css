@@ -300,20 +300,24 @@ button {
 
 /* Navbar */
 .navbar {
-  display: flex;
+  display: inline;
   justify-content: space-between;
-  align-items: center;
+  align-items:flex-end;
   padding: 0.7rem 2rem;
   position: fixed;
   z-index: 1;
   width: 100%;
   top: 0;
+  right: 0%;
   border-bottom: solid 1px var(--primary-color);
   opacity: 0.9;
+ 
 }
 
 .navbar ul {
   display: flex;
+  float: right;
+ 
 }
 
 .navbar a {
@@ -583,18 +587,22 @@ button {
 }
 
 /*Buttons*/
+.buttons{
+  margin:25px;
+}
 .btn-1 {
   border: 1px transparent;
   padding: 20px 40px;
-  font-size: 110%;
+  font-size: 100%;
   border-radius: 200px;
   margin-top: 50px;
+  margin:50px;
   background-color: rgba(61, 119, 206, 0.747);
   color: #fff;
   text-decoration: none;
   font-family: "Rubik", "Arial", sans-serif;
   transition: backround-color 0.2s, border 0.2s, font-size 0.2s;
-  margin-left: 45%;
+ 
   outline: 0;
 }
 
